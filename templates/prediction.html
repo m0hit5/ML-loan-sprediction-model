@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .title-font {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .leading-relaxed {
+            line-height: 1.6;
+            color: #666;
+        }
+        .form-label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-select, .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .form-select:focus, .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .btn-primary {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<section class="text-gray-600 body-font">
+    <div class="container">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Loan prediction project</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Fill the form for prediction</p>
+            <br><br><h2><b>{{prediction_text}}</b></h2>
+        </div>
+        <form action='/predict' method='POST'>
+            <div class="mb-3">
+                <label for="gender" class="form-label"><b>Gender</b></label>
+                <select class="form-select" id="gender" name="gender">
+                    <option selected>-- select gender --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="married" class="form-label">Married Status</label>
+                <select class="form-select" id="married" name="married">
+                    <option selected>-- select married status --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="dependents" class="form-label">Dependents</label>
+                <select class="form-select" id="dependents" name="dependents">
+                    <option selected>-- select dependents --</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3+">3+</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="education" class="form-label">Education</label>
+                <select class="form-select" id="education" name="education">
+                    <option selected>-- select education --</option>
+                    <option value="Graduate">Graduate</option>
+                    <option value="Not Graduate">Not Graduate</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="employed" class="form-label">Self Employed</label>
+                <select class="form-select" id="employed" name="employed">
+                    <option selected>-- select Self Employed --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="credit" class="form-label">Credit History</label>
+                <select class="form-select" id="credit" name="credit">
+                    <option selected>-- select Credit History --</option>
+                    <option value="1.000000">1.000000</option>
+                    <option value="0.000000">0.000000</option>
+                    <option value="0.842199">0.842199</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="area" class="form-label">Property Area</label>
+                <select class="form-select" id="area" name="area">
+                    <option selected>-- select Property Area --</option>
+                    <option value="Semiurban">Semiurban</option>
+                    <option value="Urban">Urban</option>
+                    <option value="Rural">Rural</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="ApplicantIncome" class="form-label">Enter Applicant Income</label>
+                <input type="text" class="form-control" id="ApplicantIncome" name="ApplicantIncome" placeholder="Applicant Income">
+            </div>
+            <div class="mb-3">
+                <label for="CoapplicantIncome" class="form-label">Enter Coapplicant Income</label>
+                <input type="text" class="form-control" id="CoapplicantIncome" name="CoapplicantIncome" placeholder="Coapplicant Income">
+            </div>
+            <div class="mb-3">
+                <label for="LoanAmount" class="form-label">Enter Loan Amount</label>
+                <input type="text" class="form-control" id="LoanAmount" name="LoanAmount" placeholder="Loan Amount">
+            </div>
+            <div class="mb-3">
+                <label for="Loan_Amount_Term" class="form-label">Enter Loan Amount Term</label>
+                <input type="text" class="form-control" id="Loan_Amount_Term" name="Loan_Amount_Term" placeholder="Loan Amount Term">
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>
